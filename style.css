@@ -1,0 +1,251 @@
+/* ========== БАЗОВЫЕ СТИЛИ ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f3ef;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 1960px;
+    margin: 0 auto;
+    padding: 0 70px;
+}
+
+/* ========== НАВИГАЦИЯ ========== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 28px 0 20px 0;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    text-decoration: none;
+}
+
+.logo-placeholder {
+    display: flex;
+    width: 42px;
+    height: 56px;
+}
+
+.logo-placeholder img {
+    width: 100%;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1e2a2e;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #2c3e2f;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+    padding-bottom: 4px;
+}
+
+.nav-link:hover {
+    border-bottom-color: #b78c5a;
+    color: #8b5a2b;
+}
+
+.nav-link.active {
+    border-bottom-color: #b78c5a;
+    color: #8b5a2b;
+}
+
+.nav-divider {
+    width: 100%;
+    height: 2px;
+    background: #d9cfbd;
+    margin: 8px 0 32px 0;
+}
+
+/* ========== ЗАГОЛОВКИ ========== */
+.section-title {
+    font-family: 'Bellota', cursive;
+    font-weight: 400;
+    font-size: 2.2rem;
+    margin-bottom: 48px;
+    color: #2c2b26;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 1.8rem;
+    background-color: #c17b4c;
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    height: 95%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-image-container {
+    max-width: 95%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: zoomIn 0.3s ease;
+}
+
+.close-modal {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 1001;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+}
+
+.close-modal:hover {
+    color: #ccc;
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* ========== ЗАЩИТА ИЗОБРАЖЕНИЙ ========== */
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ========== ФУТЕР ========== */
+footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    font-size: 0.85rem;
+    color: #7f6e54;
+    border-top: 1px solid #e2d9cd;
+    margin-top: 40px;
+}
+
+/* ========== ОБЩАЯ АДАПТИВНОСТЬ (НАВИГАЦИЯ, МОДАЛКА, КОНТЕЙНЕР) ========== */
+@media (max-width: 1300px) {
+    .container { padding: 0 50px; }
+}
+
+@media (max-width: 1024px) {
+    .container { padding: 0 40px; }
+    .section-title { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 30px; }
+    .section-title { font-size: 1.8rem; margin-bottom: 35px; }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-links { gap: 1.5rem; }
+    .nav-link { font-size: 1.2rem; }
+    .logo-text { font-size: 1.4rem; }
+    .close-modal { width: 44px; height: 44px; font-size: 36px; top: 20px; right: 20px; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 20px; }
+    .section-title { font-size: 1.4rem; margin-bottom: 28px; }
+    .section-title::before { height: 1.2rem; width: 4px; }
+    .logo-text { font-size: 1.2rem; }
+    .logo-placeholder { width: 32px; height: 42px; }
+    .nav-link { font-size: 1rem; }
+    .nav-links { gap: 1rem; }
+    .close-modal { width: 38px; height: 38px; font-size: 28px; top: 15px; right: 15px; }
+}
+
+@media (max-width: 375px) {
+    .container { padding: 0 15px; }
+    .section-title { font-size: 1.2rem; }
+    .logo-text { font-size: 1rem; }
+    .nav-link { font-size: 0.9rem; }
+    .close-modal { width: 32px; height: 32px; font-size: 24px; top: 12px; right: 12px; }
+}

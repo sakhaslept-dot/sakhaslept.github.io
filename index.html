@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Визуальная энциклопедия — Мун</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="img/ВЭ.svg">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== УНИКАЛЬНЫЕ СТИЛИ ТОЛЬКО ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ========== */
+        
+        /* БЛОК 1: О ГЕРОЕ */
+        .hero-block {
+            margin-bottom: 80px;
+        }
+
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text-card {
+            flex: 1;
+            background: white;
+            padding: 2.5rem 2rem;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-style: italic;
+        }
+
+        .hero-text-card p {
+            font-size: 2rem;
+            line-height: 1.5;
+            color: #2d3e3b;
+            font-style: italic;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+            width: 643px;
+            height: 910px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #ece7e4;
+        }
+
+        /* БЛОК 2: КОНЦЕПТЫ */
+        .concepts-block {
+            margin-bottom: 100px;
+        }
+
+        .concepts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .top-group {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .vertical-card {
+            width: 414px;
+            height: 828px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .vertical-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .four-horizontal {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .horiz-card {
+            border-radius: 24px;
+            aspect-ratio: 642 / 394;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .horiz-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bottom-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .large-card {
+            border-radius: 28px;
+            aspect-ratio: 643 / 300;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .large-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* АДАПТИВНОСТЬ ГЛАВНОЙ СТРАНИЦЫ */
+        @media (max-width: 1300px) {
+            .top-group, .four-horizontal, .bottom-group { gap: 30px; }
+            .vertical-card { width: 340px; height: auto; aspect-ratio: 414 / 828; }
+            .hero-text-card p { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-text-card p { font-size: 1.2rem; }
+            .vertical-card { width: 280px; }
+            .hero-image { width: 480px; height: auto; aspect-ratio: 643 / 910; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-layout {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .hero-image {
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+                border-radius: 14px;
+            }
+            .hero-text-card { width: 100%; text-align: left; }
+            .hero-text-card p { font-size: 1rem; }
+            .top-group { grid-template-columns: 1fr; gap: 30px; }
+            .vertical-card {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                border-radius: 14px;
+            }
+            .bottom-group { grid-template-columns: repeat(2, 1fr); }
+            .large-card, .horiz-card { border-radius: 14px; }
+        }
+
+        @media (max-width: 480px) {
+            .four-horizontal, .bottom-group {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .horiz-card, .large-card { border-radius: 8px; }
+            .hero-image { border-radius: 8px; }
+            .hero-text-card p { font-size: 0.85rem; }
+            .hero-text-card { padding: 1.2rem; }
+        }
+
+        @media (max-width: 375px) {
+            .hero-image { max-width: 280px; border-radius: 5px; }
+            .hero-text-card p { font-size: 0.75rem; }
+            .hero-text-card { width: 200px; height: 190px; padding: 1rem; }
+            .vertical-card { max-width: 220px; border-radius: 5px; }
+            .four-horizontal, .bottom-group, .horiz-card, .large-card { gap: 15px; border-radius: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar">
+        <div class="logo-area" id="logoClick">
+            <div class="logo-placeholder">
+                <img src="img/Vector.svg" alt="Логотип ВЭ">
+            </div>
+            <span class="logo-text">Визуальная энциклопедия</span>
+        </div>
+        <div class="nav-links">
+            <a class="nav-link active" href="index.html">О герое</a>
+            <a class="nav-link" id="navDesign" href="design.html">Дизайн</a>
+            <a class="nav-link" id="navInfo" href="info.html">Информация</a>
+        </div>
+    </nav>
+    
+    <div class="nav-divider"></div>
+
+    <!-- БЛОК 1: О ГЕРОЕ -->
+    <div class="hero-block">
+        <div class="section-title">Кратко о герое</div>
+        <div class="hero-layout">
+            <div class="hero-text-card">
+                <p>
+                    <strong>Мьюн</strong> — главный герой «Мьюн: Страж Луны». Юный фавн с чистым сердцем, Мьюн оказывается не готов к тому, что его выберут новым Стражем Луны. Но когда из-за его ошибки мир оказывается на грани катастрофы, он отправляется в путешествие, чтобы исправить ситуацию и доказать, что достоин быть Стражем.
+                </p>
+            </div>
+            <div class="hero-image clickable-image">
+                <img src="img/мюн.webp" alt="Мун" draggable="false">
+            </div>
+        </div>
+    </div>
+
+    <!-- БЛОК 2: КОНЦЕПТЫ -->
+    <div class="concepts-block">
+        <div class="section-title">Концепты</div>
+        <div class="concepts-grid">
+            
+            <!-- Верхняя группа -->
+            <div class="top-group">
+                <div class="vertical-card clickable-image">
+                    <img src="img/мюн концепт в цвете 2.webp" alt="Мюн концепт в цвете 2" draggable="false">
+                </div>
+                
+                <div class="four-horizontal">
+                    <div class="horiz-card clickable-image">
+                        <img src="img/мюн референс.webp" alt="Мюн референс" draggable="false">
+                    </div>
+                    <div class="horiz-card clickable-image">
+                        <img src="img/мюн концепт в цвете.webp" alt="Мюн концепт в цвете" draggable="false">
+                    </div>
+                    <div class="horiz-card clickable-image">
+                        <img src="img/мюн концепт.webp" alt="Мюн концепт" draggable="false">
+                    </div>
+                    <div class="horiz-card clickable-image">
+                        <img src="img/мюн один 5.webp" alt="Мюн один" draggable="false">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Нижняя группа -->
+            <div class="bottom-group">
+                <div class="large-card clickable-image">
+                    <img src="img/мюн концепт-скетч 1.webp" alt="Скетч 1" draggable="false">
+                </div>
+                <div class="large-card clickable-image">
+                    <img src="img/мюн концепт-скетч 2.webp" alt="Скетч 2" draggable="false">
+                </div>
+                <div class="large-card clickable-image">
+                    <img src="img/мюн концепт-скетч 3.webp" alt="Скетч 3" draggable="false">
+                </div>
+                <div class="large-card clickable-image">
+                    <img src="img/мюн концепт-скетч 4.webp" alt="Скетч 4" draggable="false">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Визуальная энциклопедия — дизайн персонажа Мьюн</p>
+    </footer>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО (БЕЗ КНОПКИ СКАЧИВАНИЯ) -->
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <div class="modal-image-container">
+            <img class="modal-image" id="modalImage" alt="Полный размер">
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== МОДАЛЬНОЕ ОКНО ==========
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    let currentImageUrl = '';
+    
+    // Открыть модальное окно
+    function openModal(imageUrl) {
+        currentImageUrl = imageUrl;
+        modalImage.src = imageUrl;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Закрыть модальное окно
+    function closeModalWindow() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        modalImage.src = '';
+    }
+    
+    // Навешиваем обработчики на все кликабельные изображения
+    const clickableImages = document.querySelectorAll('.clickable-image');
+    
+    clickableImages.forEach(container => {
+        container.addEventListener('click', () => {
+            const img = container.querySelector('img');
+            if (img && img.src) {
+                openModal(img.src);
+            }
+        });
+    });
+    
+    // Обработчики закрытия
+    closeModal.addEventListener('click', closeModalWindow);
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalWindow();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModalWindow();
+        }
+    });
+    
+    console.log('✅ Готово! Кликайте на любую картинку для просмотра.');
+</script>
+
+</body>
+</html>

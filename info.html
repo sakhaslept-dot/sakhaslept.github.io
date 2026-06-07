@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Визуальная энциклопедия — Информация о фильме</title>
+    
+    <link rel="icon" type="image/svg+xml" href="img/ВЭ.svg">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Общие стили -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* ========== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ИНФОРМАЦИЯ ========== */
+        
+        .info-block {
+            margin-bottom: 60px;
+        }
+        
+        /* Вступительный текст (цитата/лид) */
+        .lead-text {
+            background: white;
+            padding: 2.5rem;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+        
+        .lead-text p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #2d3e3b;
+        }
+        
+        /* Подзаголовки внутри блока — ЧЁРНЫЙ ЦВЕТ, БЕЗ ИКОНОК */
+        .info-subtitle {
+            font-family: 'Bellota', cursive;
+            font-weight: 400;
+            font-size: 1.8rem;
+            margin: 40px 0 25px 0;
+            color: #1e2a2e;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .info-subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 1.5rem;
+            background-color: #c17b4c;
+        }
+        
+        /* Карточка с общей информацией (сетка) */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            background: white;
+            padding: 2rem;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .fact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .fact-label {
+            font-weight: 700;
+            color: #c17b4c;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .fact-value {
+            font-size: 1.1rem;
+            color: #2d3e3b;
+        }
+        
+        /* Обычный текст */
+        .info-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #2d3e3b;
+            margin-bottom: 20px;
+        }
+        
+        /* Две колонки для интересных фактов */
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .two-columns .info-text {
+            margin-bottom: 0;
+        }
+        
+        /* Разделитель */
+        .divider-light {
+            height: 1px;
+            background: #d9cfbd;
+            margin: 40px 0;
+        }
+        
+        /* Заключительная фраза */
+        .closing {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: 50px;
+        }
+        
+        .closing p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #2d3e3b;
+            font-style: italic;
+        }
+        
+        /* Список рекомендаций */
+        .info-list {
+            margin: 15px 0 15px 25px;
+            list-style: none;
+        }
+        
+        .info-list li {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #2d3e3b;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #c17b4c;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .lead-text p { font-size: 1rem; }
+            .info-subtitle { font-size: 1.5rem; margin: 30px 0 20px 0; }
+            .two-columns { grid-template-columns: 1fr; gap: 25px; }
+            .facts-grid { grid-template-columns: 1fr; gap: 15px; }
+            .fact-value { font-size: 0.95rem; }
+            .info-text { font-size: 0.95rem; }
+            .closing p { font-size: 1.1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .lead-text { padding: 1.5rem; }
+            .lead-text p { font-size: 0.9rem; }
+            .info-subtitle { font-size: 1.3rem; }
+            .facts-grid { padding: 1.2rem; }
+            .fact-label { font-size: 0.75rem; }
+            .fact-value { font-size: 0.85rem; }
+            .info-text { font-size: 0.85rem; }
+            .closing { padding: 1.5rem; }
+            .closing p { font-size: 0.95rem; }
+            .info-list li { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-area">
+            <div class="logo-placeholder">
+                <img src="img/Vector.svg" alt="Логотип ВЭ">
+            </div>
+            <span class="logo-text">Визуальная энциклопедия</span>
+        </a>
+        <div class="nav-links">
+            <a class="nav-link" href="index.html">О герое</a>
+            <a class="nav-link" href="design.html">Дизайн</a>
+            <a class="nav-link active" href="info.html">Информация</a>
+        </div>
+    </nav>
+    
+    <div class="nav-divider"></div>
+
+    <!-- СТРАНИЦА ИНФОРМАЦИЯ -->
+    <div class="info-block">
+        <div class="section-title">Информация</div>
+        
+        <!-- Вступительный текст -->
+        <div class="lead-text">
+            <p>
+                В 2014 году в мире анимации произошло событие, которое сначала осталось в тени, 
+                но со временем обрело статус культового. Французская студия ON Animation Studios 
+                подарила зрителям «Хранителя Луны» — мультфильм, который критики назвали 
+                «любовным письмом воображению». Это история о маленьком пушистом существе по имени Мьюн, 
+                которому предстоит стать хранителем ночного светила. Но за простым сюжетом скрывается 
+                глубокое размышление о творчестве, дружбе и принятии себя.
+            </p>
+        </div>
+        
+        <!-- Общие сведения -->
+        <div class="info-subtitle">Общие сведения</div>
+        <div class="facts-grid">
+            <div class="fact-item">
+                <span class="fact-label">Оригинальное название</span>
+                <span class="fact-value">Mune, le gardien de la lune</span>
+            </div>
+            <div class="fact-item">
+                <span class="fact-label">Год выпуска</span>
+                <span class="fact-value">2014 (премьера во Франции — 14 октября 2015)</span>
+            </div>
+            <div class="fact-item">
+                <span class="fact-label">Страны производства</span>
+                <span class="fact-value">Франция, США</span>
+            </div>
+            <div class="fact-item">
+                <span class="fact-label">Длительность</span>
+                <span class="fact-value">85–86 минут</span>
+            </div>
+            <div class="fact-item">
+                <span class="fact-label">Бюджет</span>
+                <span class="fact-value">17 миллионов долларов США</span>
+            </div>
+            <div class="fact-item">
+                <span class="fact-label">Сборы в мире</span>
+                <span class="fact-value">14 534 046 долларов США</span>
+            </div>
+        </div>
+        
+        <!-- Сюжет в двух словах -->
+        <div class="info-subtitle">Сюжет в двух словах</div>
+        <div class="info-text">
+            В центре вселенной, где небесными телами управляют специальные хранители, происходит смена власти. 
+            Мьюн, мечтательное и неуклюжее создание из лунного света, получает пост Хранителя Луны. 
+            Его сосед — горячий и сильный Сохон — становится Хранителем Солнца. Из-за неопытности Мьюна 
+            древний враг по имени Забытый (Некросс) похищает Солнце. Теперь Мьюну, Сохону и девушке-хранительнице 
+            Глимм предстоит вернуть светило на небо и спасти свой мир.
+        </div>
+        
+        <!-- Интересные факты о производстве -->
+        <div class="info-subtitle">Интересные факты о производстве</div>
+        
+        <div class="two-columns">
+            <div class="info-text">
+                <strong>Рождение уникального стиля</strong><br>
+                Режиссёр Александр Эбоян сознательно отказался от стандартов американской анимации 
+                (таких как Pixar или DreamWorks). Он хотел создать мир, который выглядел бы как ожившая 
+                иллюстрация к сказке на ночь. В результате «Хранитель Луны» обладает узнаваемым почерком: 
+                полупрозрачные текстуры, отсутствие чётких контуров и удивительная игра света.
+            </div>
+            <div class="info-text">
+                <strong>Влияние великих мастеров</strong><br>
+                Критики единогласно отмечали, что «Хранитель Луны» вбирает в себя лучшее из двух миров: 
+                масштаб и поэзию работ Хаяо Миядзаки («Унесённые призраками», «Принцесса Мононоке») 
+                и тёплый, понятный юмор Pixar. Получился редкий гибрид, который называют 
+                «европейским ответом аниме».
+            </div>
+        </div>
+        
+        <div class="two-columns">
+            <div class="info-text">
+                <strong>Скромный бюджет при больших амбициях</strong><br>
+                Бюджет в 17 миллионов долларов — сумма весьма скромная для анимационного фильма 
+                (сравните с 175 миллионами у «Холодного сердца»). Это налагало ограничения, но команда 
+                использовала их как источник творческой свободы. Вместо фотореалистичных текстур они выбрали стилизацию.
+            </div>
+            <div class="info-text">
+                <strong>Легенды французского дубляжа</strong><br>
+                Во французской версии озвучивания принял участие Патрик Пуаве — актёр, которого во Франции 
+                знает каждый. Он является официальным «голосом» Мела Гибсона в дубляже всех его фильмов.
+            </div>
+        </div>
+        
+        <!-- ВСЁ ОСТАЛЬНОЕ ВМЕСТЕ (без разделения) -->
+        <div class="info-subtitle">Послесловие</div>
+        <div class="info-text">
+            После проката в кинотеатрах, где фильм не окупился полностью, «Хранитель Луны» обрёл вторую жизнь 
+            на Netflix. Платформа сделала его доступным для миллионов зрителей по всему миру. 
+            «Хранитель Луны» — это редкий пример анимационного фильма, который не пытается понравиться всем. 
+            Он предназначен для зрителей, уставших от громких спецэффектов и желающих погрузиться в созерцательную, 
+            почти философскую сказку. Со временем фильм нашёл свою аудиторию среди поклонников 
+            «Песни моря», «Мира Кейт» и «Маленького принца».
+        </div>
+    
+    <footer>
+        <p>Визуальная энциклопедия — «Хранитель Луны» (Mune, le gardien de la lune)</p>
+    </footer>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <div class="modal-image-container">
+            <img class="modal-image" id="modalImage" alt="Полный размер">
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    function closeModalWindow() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        modalImage.src = '';
+    }
+    
+    closeModal.addEventListener('click', closeModalWindow);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModalWindow(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'block') closeModalWindow(); });
+</script>
+
+</body>
+</html>

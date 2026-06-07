@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Визуальная энциклопедия — Дизайн персонажа</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="img/ВЭ.svg">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== УНИКАЛЬНЫЕ СТИЛИ ТОЛЬКО ДЛЯ СТРАНИЦЫ ДИЗАЙН ========== */
+        
+        /* БЛОК 1: ОПИСАНИЕ */
+        .description-block {
+            margin-bottom: 80px;
+        }
+
+        .full-width-text {
+            background: white;
+            padding: 2.5rem;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 60px;
+        }
+
+        .full-width-text p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #2d3e3b;
+        }
+
+        /* Три колонки */
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-text {
+            padding: 1.5rem;
+        }
+
+        .feature-text h3 {
+            font-family: 'Bellota', cursive;
+            font-size: 1.5rem;
+            color: #c17b4c;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-text p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #4a5b56;
+        }
+
+        /* БЛОК 2: ПАЛИТРА */
+        .palette-block {
+            margin-bottom: 80px;
+        }
+
+        .palette-layout {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palette-large {
+            flex: 1;
+            max-width: 50%;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .palette-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .palette-right {
+            flex: 1;
+            max-width: 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .palette-description {
+            background: white;
+            padding: 2rem;
+            border-left: 8px solid #c17b4c;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .palette-description p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #2d3e3b;
+        }
+
+        .palette-code {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .palette-code img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* БЛОК 3: ЛОКАЦИИ (ГАЛЕРЕЯ) */
+        .locations-block {
+            margin-bottom: 100px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #e8e0d4;
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .gallery-item.vertical {
+            grid-row: span 2;
+            aspect-ratio: 3 / 4;
+        }
+
+        .gallery-item:not(.vertical) {
+            aspect-ratio: 16 / 10;
+        }
+
+        /* АДАПТИВНОСТЬ СТРАНИЦЫ ДИЗАЙН */
+        @media (max-width: 1300px) {
+            .gallery-grid { gap: 20px; }
+        }
+
+        @media (max-width: 1100px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        }
+
+        @media (max-width: 1024px) {
+            .three-columns { gap: 25px; }
+            .palette-layout { flex-direction: column; }
+            .palette-large, .palette-right { max-width: 100%; width: 100%; }
+            .full-width-text p { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        }
+
+        @media (max-width: 768px) {
+            .three-columns { grid-template-columns: 1fr; gap: 30px; }
+            .full-width-text p { font-size: 1rem; }
+            .full-width-text { padding: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-item:not(.vertical) { aspect-ratio: 16 / 9; }
+        }
+
+        @media (max-width: 480px) {
+            .full-width-text p { font-size: 0.9rem; }
+            .full-width-text { padding: 1.2rem; }
+            .feature-text h3 { font-size: 1.2rem; }
+            .feature-text p { font-size: 0.85rem; }
+            .palette-description p { font-size: 0.9rem; }
+        }
+
+        @media (max-width: 375px) {
+            .full-width-text p { font-size: 0.8rem; }
+            .full-width-text { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar">
+        <a href="index.html" class="logo-area">
+            <div class="logo-placeholder">
+                <img src="img/Vector.svg" alt="Логотип ВЭ">
+            </div>
+            <span class="logo-text">Визуальная энциклопедия</span>
+        </a>
+        <div class="nav-links">
+            <a class="nav-link" href="index.html">О герое</a>
+            <a class="nav-link active" href="design.html">Дизайн</a>
+            <a class="nav-link" href="info.html">Информация</a>
+        </div>
+    </nav>
+    
+    <div class="nav-divider"></div>
+
+    <!-- БЛОК 1: ДИЗАЙН -->
+    <div class="description-block">
+        <div class="section-title">Дизайн</div>
+        
+        <div class="full-width-text">
+            <p>
+                <strong>Мьюн</strong> — персонаж, чей визуальный облик был разработан с особым вниманием к деталям. 
+                Его дизайн сочетает в себе черты фавна и юного исследователя. 
+                Основная задача дизайнеров была — создать героя, который выглядит одновременно уязвимым и решительным, 
+                ведь ему предстоит пройти долгий путь от неопытного стража до настоящего героя. Силуэт Мьюна округлый и мягкий, 
+                что подчёркивает его доброту, но в ключевые моменты он способен принимать уверенные, острые позы.
+            </p>
+        </div>
+
+        <div class="three-columns">
+            <div class="feature-card">
+                <div class="feature-image">
+                    <img src="img/мюн концепт.webp" alt="Силуэт и форма">
+                </div>
+                <div class="feature-text">
+                    <h3>Силуэт и форма</h3>
+                    <p>Мягкие, округлые линии делают Муна визуально дружелюбным. Его поза всегда выражает готовность к приключениям, а маленький рост подчёркивает его юность.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-image">
+                    <img src="img/мюн концепт-скетч 2.webp" alt="Элементы">
+                </div>
+                <div class="feature-text">
+                    <h3>Ключевые элементы</h3>
+                    <p>Большая голова и гибкое тело делают его любопытным и невинным на вид, что подчеркивают его большие глаза и уши.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-image">
+                    <img src="img/мюн один 5.webp" alt="Природа">
+                </div>
+                <div class="feature-text">
+                    <h3>Связь с природой</h3>
+                    <p>Он дитя леса, дети и животные его любят. Каждая деталь подчёркивает связь с природой и луной. Цветовая гамма крепко связана с его домом.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- БЛОК 2: ПАЛИТРА -->
+    <div class="palette-block">
+        <div class="section-title">Палитра</div>
+        
+        <div class="palette-layout">
+            <div class="palette-large">
+                <img src="img/цвета.jpg" alt="Основная палитра персонажа">
+            </div>
+            
+            <div class="palette-right">
+                <div class="palette-description">
+                    <p>
+                        Цветовая схема Муна строится на контрасте небесных оттенков.<br><br>
+                        <strong>Шерсть:</strong> серебристо-голубой (#4F90B0) — символизирует ночное небо и его дом.<br>
+                        <strong>Элементы:</strong> зеленоватый оттенок глаз (#2A4A4A) напоминает лес.<br>
+                        <strong>Мех на руках и ногах:</strong> Темно-синий (#0E3143), выражающие решимость и спокойствие.
+                    </p>
+                </div>
+                <div class="palette-code">
+                    <img src="img/Палитра.jpg" alt="HEX-коды палитры">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- БЛОК 3: ЛОКАЦИИ (ГАЛЕРЕЯ) -->
+    <div class="locations-block">
+        <div class="section-title">Концепт-арты</div>
+        
+        <div class="gallery-grid">
+            <!-- Вертикальная картинка -->
+            <div class="gallery-item vertical">
+                <img src="img/мюн окружение 4.webp" alt="Вертикальная локация" draggable="false">
+            </div>
+            <!-- Квадратная и горизонтальные картинки -->
+            <div class="gallery-item">
+                <img src="img/мюн один 3.webp" alt="Локация 1" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн один 2.webp" alt="Локация 2" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн один 4.webp" alt="Локация 3" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн один 5.webp" alt="Локация 4" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн один 6.webp" alt="Локация 5" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн окружение 2.webp" alt="Локация 6" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн окружение 3.webp" alt="Локация 7" draggable="false">
+            </div>
+            <div class="gallery-item">
+                <img src="img/мюн окружение 5.webp" alt="Локация 8" draggable="false">
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Визуальная энциклопедия — дизайн персонажа Мьюн</p>
+    </footer>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <div class="modal-image-container">
+            <img class="modal-image" id="modalImage" alt="Полный размер">
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    const clickableItems = document.querySelectorAll('.feature-image, .palette-large, .palette-code, .gallery-item');
+    
+    function openModal(imageUrl) {
+        modalImage.src = imageUrl;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModalWindow() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        modalImage.src = '';
+    }
+    
+    clickableItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            if (img && img.src) openModal(img.src);
+        });
+    });
+    
+    closeModal.addEventListener('click', closeModalWindow);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModalWindow(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'block') closeModalWindow(); });
+</script>
+
+</body>
+</html>
